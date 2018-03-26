@@ -11,15 +11,15 @@ MongoClient.connect('mongodb://user:password@172.17.0.2:27017/admin', (error, cl
 
     
 
-    // db.collection('Todos').insertOne({
-    //     text: 'Some text',
-    //     completed: false
-    // }, (error, result) => {
-    //     if (error){
-    //         return console.log('Unable to insert todo', error);
-    //     }
-    //     console.log(JSON.stringify(result.ops, undefined, 2));
-    // });
+    db.collection('Todos').insertOne({
+        text: 'Eat lunch',
+        completed: false
+    }, (error, result) => {
+        if (error){
+            return console.log('Unable to insert todo', error);
+        }
+        console.log(JSON.stringify(result.ops, undefined, 2));
+    });
 
     // db.collection('Users').insertOne({
     //     name: 'Luiz',
