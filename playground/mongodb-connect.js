@@ -2,7 +2,7 @@
 //alternative of the above
 const {MongoClient, ObjectID} = require('mongodb');
 
-MongoClient.connect('mongodb://user:password@172.17.0.3:27017/admin', (error, client) => {
+MongoClient.connect('mongodb://user:password@172.17.0.2:27017/admin', (error, client) => {
     if (error){
         return console.log('Unable to connect to MongoDB server.\n', error);
     }
