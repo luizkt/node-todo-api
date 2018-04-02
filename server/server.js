@@ -1,30 +1,40 @@
-var mongoose = require('mongoose');
+var express = require('express');
+var bodyParser = require('body-parser');
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://user:password@172.17.0.2:27017/TodoApp?authSource=admin').then(() => {
-    console.log('Successfully connected to database.');
-}, (error) => {
-    console.log('Unable to set connection to database.\n', error);
+var { mongoose } = require('./db/mongoose');
+var { Todo } = require('./models/todo');
+var { User } = require('./models/user');
+
+var app = express();
+
+app.use(bodyParser.json());
+
+app.post('/todos', (request, response) => {
+    var todo = new Todo({
+        text: request.body.text
+    });
+    
+    todo.save().then((doc) => {
+        response.send(doc);
+    }, (error) => {
+        response.status(400).send(error);
+    });
 });
 
-var Todo = mongoose.model('Todo', {
-    text: { 
-        type: String
-    },
-    completed: {
-        type: Boolean
-    },
-    completedAt: {
-        type: Number
-    }
+app.listen(3000, () => {
+    console.log('Started server on port 3000');
 });
 
-var newTodo = new Todo({
-    text: 'Walk the dog'
-});
 
-newTodo.save().then((doc) => {
-    console.log('Saved todo.', doc);
-}, (error) => {
-    console.log('Unable to save todo: ', error.message);
-});
+
+
+// var newUser = new User({
+//     name: 'Luiz',
+//     email: 'bla@yahoo.com'
+// });
+
+// newUser.save().then((doc) => {
+//     console.log('Saved user: \n', doc);
+// }, (error) => {
+//     console.log('Unable to save user: ', error.message);
+// });
