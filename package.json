@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/luizkt/node-todo-api#readme",
   "dependencies": {
-    "mongodb": "^3.0.4"
+    "mongodb": "^3.0.4",
+    "mongoose": "^5.0.12"
   }
 }
